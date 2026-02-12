@@ -19,10 +19,11 @@
             margin: 0;
         }
 
+        /* Background Otter Decorations */
         .otter-bg {
             position: absolute;
             width: 80px;
-            opacity: 0.4;
+            opacity: 0.3;
             z-index: 0;
             animation: float 8s ease-in-out infinite;
         }
@@ -61,24 +62,34 @@
             margin-top: 25px;
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 20px;
-            height: 60px;
+            min-height: 80px;
         }
 
         button {
-            padding: 15px 30px;
-            font-size: 1.3rem;
+            padding: 12px 25px;
+            font-size: 1.1rem;
             font-weight: 900;
             border: none;
             border-radius: 15px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 5px 0px #0077b6;
         }
 
-        .yes-btn { background-color: #00bfff; color: white; position: relative; }
-        .yes-btn:active { transform: translateY(4px); box-shadow: 0 1px 0px #0077b6; }
-        .no-btn { background-color: #0077b6; color: white; position: absolute; box-shadow: 0 5px 0px #023e8a; }
+        .yes-btn { 
+            background-color: #00bfff; 
+            color: white; 
+            z-index: 2;
+        }
+
+        .no-btn { 
+            background-color: #0077b6; 
+            color: white; 
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
 
         .signature {
             margin-top: 30px;
@@ -101,17 +112,18 @@
 <body>
 
     <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:5%; left:5%;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:60%; left:85%; animation-delay: 2s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:25%; left:70%; animation-delay: 4s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:85%; left:10%; animation-delay: 1s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:15%; left:80%; animation-delay: 2s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:70%; left:10%; animation-delay: 4s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:80%; left:75%; animation-delay: 1s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:40%; left:85%; animation-delay: 3s;">
 
     <div class="container" id="mainCard">
         <img src="my-photo.png" alt="Our Photo" class="main-photo">
         <h1>Will you be my Valentine?</h1>
         
-        <div class="buttons">
+        <div class="buttons" id="btnContainer">
             <button class="yes-btn" onclick="celebrate()">Yes princess</button>
-            <button class="no-btn" id="runBtn" onmouseover="moveButton()">uh nonono uh boy</button>
+            <button class="no-btn" id="runBtn" onmouseover="moveButton()">uh nononono uh boy</button>
         </div>
 
         <div class="signature">
@@ -121,23 +133,36 @@
     </div>
 
     <script>
+        let moveCount = 0;
+
         function moveButton() {
             const btn = document.getElementById('runBtn');
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 100);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            moveCount++;
+
+            if (moveCount <= 3) {
+                // Change to absolute positioning so it can fly anywhere
+                btn.style.position = 'absolute';
+                
+                // Keep the button within the screen bounds
+                const x = Math.random() * (window.innerWidth - 200);
+                const y = Math.random() * (window.innerHeight - 100);
+                
+                btn.style.left = x + 'px';
+                btn.style.top = y + 'px';
+            } else {
+                // After 3 times, the button disappears
+                btn.style.display = 'none';
+            }
         }
 
         function celebrate() {
             document.getElementById('mainCard').innerHTML = `
                 <img src="my-photo.png" alt="Our Photo" class="main-photo" style="transform: rotate(2deg);">
                 <h1>I'm Otter-ly in Love with You ❤️</h1>
-                <p style="font-size: 1.4rem;">I knew you'd say Yes!<br>See you in SF!</p>
                 <div style="font-size: 60px; margin-top: 15px;">🦦</div>
                 <div class="signature">
                     Oyuka
-                    <span class="date">Feb 14, 2026 </span>
+                    <span class="date">Feb 14, 2026</span>
                 </div>
             `;
         }
