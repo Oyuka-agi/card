@@ -19,36 +19,35 @@
             margin: 0;
         }
 
-        /* 1. HEART COLOR CHANGE IS HERE */
         .heart {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             background-color: #ff0000; /* Red */
             transform: rotate(45deg);
-            opacity: 0.6;
+            opacity: 0.5;
             animation: float 6s ease-in-out infinite;
             z-index: 0;
         }
         .heart::before, .heart::after {
             content: "";
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ff0000; /* Red */
+            width: 15px;
+            height: 15px;
+            background-color: #ff0000;
             border-radius: 50%;
         }
-        .heart::before { left: -10px; }
-        .heart::after { top: -10px; }
+        .heart::before { left: -8px; }
+        .heart::after { top: -8px; }
 
         @keyframes float {
             0% { transform: translateY(0px) rotate(45deg) scale(1); }
-            50% { transform: translateY(-30px) rotate(45deg) scale(1.1); }
+            50% { transform: translateY(-40px) rotate(45deg) scale(1.2); }
             100% { transform: translateY(0px) rotate(45deg) scale(1); }
         }
 
         .container {
-            background: #ff007f; /* Bright Pink Card */
+            background: #ff007f; /* Bright Pink */
             padding: 40px;
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -92,7 +91,7 @@
         }
 
         .yes-btn { background-color: #00bfff; color: white; z-index: 2; }
-        .no-btn { background-color: #0077b6; color: white; white-space: nowrap; }
+        .no-btn { background-color: #0077b6; color: white; white-space: nowrap; transition: all 0.3s ease; }
 
         .signature {
             margin-top: 30px;
@@ -114,16 +113,7 @@
 </head>
 <body>
 
-    <div class="heart" style="top:5%; left:10%; animation-delay: 0s;"></div>
-    <div class="heart" style="top:15%; left:30%; animation-delay: 1s;"></div>
-    <div class="heart" style="top:5%; left:60%; animation-delay: 2s;"></div>
-    <div class="heart" style="top:15%; left:85%; animation-delay: 0.5s;"></div>
-    <div class="heart" style="top:40%; left:5%; animation-delay: 3s;"></div>
-    <div class="heart" style="top:45%; left:92%; animation-delay: 1.5s;"></div>
-    <div class="heart" style="top:70%; left:12%; animation-delay: 2.5s;"></div>
-    <div class="heart" style="top:85%; left:35%; animation-delay: 4s;"></div>
-    <div class="heart" style="top:75%; left:60%; animation-delay: 1s;"></div>
-    <div class="heart" style="top:88%; left:85%; animation-delay: 3.5s;"></div>
+    <div id="heart-container"></div>
 
     <div class="container" id="mainCard">
         <img src="my-photo.png" alt="Our Photo" class="main-photo">
@@ -141,12 +131,24 @@
     </div>
 
     <script>
-        let moveCount = 0;
+        // GENERATE MANY MANY HEARTS
+        const heartContainer = document.getElementById('heart-container');
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            // Randomly size them slightly for variety
+            const scale = 0.5 + Math.random();
+            heart.style.transform = `rotate(45deg) scale(${scale})`;
+            heartContainer.appendChild(heart);
+        }
 
+        let moveCount = 0;
         function moveButton() {
             const btn = document.getElementById('runBtn');
             moveCount++;
-
             if (moveCount <= 3) {
                 btn.style.position = 'absolute';
                 const x = Math.random() * (window.innerWidth - 150);
@@ -161,8 +163,8 @@
         function celebrate() {
             document.getElementById('mainCard').innerHTML = `
                 <img src="my-photo.png" alt="Our Photo" class="main-photo" style="transform: rotate(2deg);">
-                <h1>I'm Otter-ly in love with Youuu~~~~ ❤️</h1>
-                <p style="font-size: 1.4rem;">Im your valentine 4ever!</p>
+                <h1>Im Otterly in love with you ❤️❤️❤️</h1>
+                <p style="font-size: 1.4rem;">Im your 4ever valentine! </p>
                 <div style="font-size: 60px; margin-top: 15px;">🦦</div>
                 <div class="signature">
                     Oyuka
