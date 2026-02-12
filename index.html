@@ -19,19 +19,32 @@
             margin: 0;
         }
 
-        /* Background Otter Decorations */
-        .otter-bg {
+        /* Floating Heart Decorations */
+        .heart {
             position: absolute;
-            width: 80px;
-            opacity: 0.3;
+            width: 20px;
+            height: 20px;
+            background-color: #ffb6c1;
+            transform: rotate(45deg);
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
             z-index: 0;
-            animation: float 8s ease-in-out infinite;
         }
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ffb6c1;
+            border-radius: 50%;
+        }
+        .heart::before { left: -10px; }
+        .heart::after { top: -10px; }
 
         @keyframes float {
-            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) translateX(15px) rotate(15deg); }
-            100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            0% { transform: translateY(0px) rotate(45deg) scale(1); }
+            50% { transform: translateY(-30px) rotate(45deg) scale(1.1); }
+            100% { transform: translateY(0px) rotate(45deg) scale(1); }
         }
 
         .container {
@@ -74,7 +87,7 @@
             border: none;
             border-radius: 15px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: transform 0.2s;
             box-shadow: 0 5px 0px #0077b6;
         }
 
@@ -87,7 +100,6 @@
         .no-btn { 
             background-color: #0077b6; 
             color: white; 
-            transition: all 0.3s ease;
             white-space: nowrap;
         }
 
@@ -111,11 +123,12 @@
 </head>
 <body>
 
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:5%; left:5%;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:15%; left:80%; animation-delay: 2s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:70%; left:10%; animation-delay: 4s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:80%; left:75%; animation-delay: 1s;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:40%; left:85%; animation-delay: 3s;">
+    <div class="heart" style="top:10%; left:10%; animation-delay: 0s;"></div>
+    <div class="heart" style="top:20%; left:80%; animation-delay: 1s;"></div>
+    <div class="heart" style="top:70%; left:15%; animation-delay: 2s;"></div>
+    <div class="heart" style="top:85%; left:75%; animation-delay: 3s;"></div>
+    <div class="heart" style="top:45%; left:90%; animation-delay: 1.5s;"></div>
+    <div class="heart" style="top:5%; left:60%; animation-delay: 2.5s;"></div>
 
     <div class="container" id="mainCard">
         <img src="my-photo.png" alt="Our Photo" class="main-photo">
@@ -123,7 +136,7 @@
         
         <div class="buttons" id="btnContainer">
             <button class="yes-btn" onclick="celebrate()">Yes princess</button>
-            <button class="no-btn" id="runBtn" onmouseover="moveButton()">uh nononono uh boy</button>
+            <button class="no-btn" id="runBtn" onmouseover="moveButton()">uh nonono uh boy</button>
         </div>
 
         <div class="signature">
@@ -140,17 +153,12 @@
             moveCount++;
 
             if (moveCount <= 3) {
-                // Change to absolute positioning so it can fly anywhere
                 btn.style.position = 'absolute';
-                
-                // Keep the button within the screen bounds
-                const x = Math.random() * (window.innerWidth - 200);
+                const x = Math.random() * (window.innerWidth - 150);
                 const y = Math.random() * (window.innerHeight - 100);
-                
                 btn.style.left = x + 'px';
                 btn.style.top = y + 'px';
             } else {
-                // After 3 times, the button disappears
                 btn.style.display = 'none';
             }
         }
