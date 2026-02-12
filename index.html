@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Be My Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -11,80 +12,133 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #ffeef2;
+            background-color: #fff0f5;
             font-family: 'Arial', sans-serif;
-            overflow: hidden; /* Prevents scrollbars if button moves off screen */
+            overflow: hidden;
+            position: relative;
+            margin: 0;
         }
+
+        .otter-bg {
+            position: absolute;
+            width: 80px;
+            opacity: 0.4;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) translateX(15px) rotate(15deg); }
+            100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        }
+
         .container {
-            background: white;
+            background: #ff007f; /* Bright Pink */
             padding: 40px;
             border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             text-align: center;
             position: relative;
             z-index: 1;
+            border: 6px solid white;
+            color: white;
+            width: 90%;
+            max-width: 400px;
         }
-        img {
-            width: 250px;
-            border: 10px solid white; /* Polaroid look */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+        img.main-photo {
+            width: 280px;
+            border: 12px solid white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
             margin-bottom: 20px;
+            transform: rotate(-2deg);
         }
-        h1 { color: #d63384; font-size: 2rem; }
+
+        h1 { font-size: 2.2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 10px; }
+
         .buttons {
-            margin-top: 30px;
+            margin-top: 25px;
             display: flex;
             justify-content: center;
             gap: 20px;
+            height: 60px;
         }
+
         button {
             padding: 15px 30px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 900;
             border: none;
-            border-radius: 50px;
+            border-radius: 15px;
             cursor: pointer;
             transition: 0.2s;
+            box-shadow: 0 5px 0px #0077b6;
         }
-        .yes-btn { background-color: #ff4d6d; color: white; }
-        .no-btn { 
-            background-color: #adb5bd; color: white; 
-            position: absolute; /* Needed for the movement script */
+
+        .yes-btn { background-color: #00bfff; color: white; position: relative; }
+        .yes-btn:active { transform: translateY(4px); box-shadow: 0 1px 0px #0077b6; }
+        .no-btn { background-color: #0077b6; color: white; position: absolute; box-shadow: 0 5px 0px #023e8a; }
+
+        .signature {
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
-        #message { display: none; color: #ff4d6d; margin-top: 20px; }
+
+        .date {
+            font-size: 0.9rem;
+            font-weight: normal;
+            display: block;
+            margin-top: 5px;
+            font-family: 'Arial', sans-serif;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="my-photo.png" alt="Our Photo">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:5%; left:5%;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:60%; left:85%; animation-delay: 2s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:25%; left:70%; animation-delay: 4s;">
+    <img src="https://cdn-icons-png.flaticon.com/512/3421/3421111.png" class="otter-bg" style="top:85%; left:10%; animation-delay: 1s;">
+
+    <div class="container" id="mainCard">
+        <img src="my-photo.png" alt="Our Photo" class="main-photo">
         <h1>Will you be my Valentine?</h1>
         
         <div class="buttons">
-            <button class="yes-btn" onclick="celebrate()">Absolutely!</button>
-            <button class="no-btn" id="runBtn" onmouseover="moveButton()">No</button>
+            <button class="yes-btn" onclick="celebrate()">Yes princess</button>
+            <button class="no-btn" id="runBtn" onmouseover="moveButton()">uh nonono uh boy</button>
         </div>
-        
-        <div id="message">
-            <h1>Yay! I love you ❤️</h1>
+
+        <div class="signature">
+            Oyuka
+            <span class="date">Feb 14, 2026</span>
         </div>
     </div>
 
     <script>
         function moveButton() {
             const btn = document.getElementById('runBtn');
-            // Calculate random positions within the window
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 100);
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
         }
 
         function celebrate() {
-            document.querySelector('.container').innerHTML = `
-                <img src="my-photo.jpg" alt="Our Photo">
-                <h1>Yesssssssss! I knew you'd say Yes! ❤️</h1>
-                <p>Can't wait fto kiss you!</p>
+            document.getElementById('mainCard').innerHTML = `
+                <img src="my-photo.png" alt="Our Photo" class="main-photo" style="transform: rotate(2deg);">
+                <h1>I'm Otter-ly in Love with You ❤️</h1>
+                <p style="font-size: 1.4rem;">I knew you'd say Yes!<br>See you in SF!</p>
+                <div style="font-size: 60px; margin-top: 15px;">🦦</div>
+                <div class="signature">
+                    Oyuka
+                    <span class="date">Feb 14, 2026 </span>
+                </div>
             `;
         }
     </script>
