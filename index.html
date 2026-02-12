@@ -19,12 +19,12 @@
             margin: 0;
         }
 
-        /* Floating Heart Decorations */
+        /* 1. HEART COLOR CHANGE IS HERE */
         .heart {
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: #ffb6c1;
+            background-color: #ff0000; /* Red */
             transform: rotate(45deg);
             opacity: 0.6;
             animation: float 6s ease-in-out infinite;
@@ -35,7 +35,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: #ffb6c1;
+            background-color: #ff0000; /* Red */
             border-radius: 50%;
         }
         .heart::before { left: -10px; }
@@ -48,7 +48,7 @@
         }
 
         .container {
-            background: #ff007f; /* Bright Pink */
+            background: #ff007f; /* Bright Pink Card */
             padding: 40px;
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -91,17 +91,8 @@
             box-shadow: 0 5px 0px #0077b6;
         }
 
-        .yes-btn { 
-            background-color: #00bfff; 
-            color: white; 
-            z-index: 2;
-        }
-
-        .no-btn { 
-            background-color: #0077b6; 
-            color: white; 
-            white-space: nowrap;
-        }
+        .yes-btn { background-color: #00bfff; color: white; z-index: 2; }
+        .no-btn { background-color: #0077b6; color: white; white-space: nowrap; }
 
         .signature {
             margin-top: 30px;
@@ -123,12 +114,16 @@
 </head>
 <body>
 
-    <div class="heart" style="top:10%; left:10%; animation-delay: 0s;"></div>
-    <div class="heart" style="top:20%; left:80%; animation-delay: 1s;"></div>
-    <div class="heart" style="top:70%; left:15%; animation-delay: 2s;"></div>
-    <div class="heart" style="top:85%; left:75%; animation-delay: 3s;"></div>
-    <div class="heart" style="top:45%; left:90%; animation-delay: 1.5s;"></div>
-    <div class="heart" style="top:5%; left:60%; animation-delay: 2.5s;"></div>
+    <div class="heart" style="top:5%; left:10%; animation-delay: 0s;"></div>
+    <div class="heart" style="top:15%; left:30%; animation-delay: 1s;"></div>
+    <div class="heart" style="top:5%; left:60%; animation-delay: 2s;"></div>
+    <div class="heart" style="top:15%; left:85%; animation-delay: 0.5s;"></div>
+    <div class="heart" style="top:40%; left:5%; animation-delay: 3s;"></div>
+    <div class="heart" style="top:45%; left:92%; animation-delay: 1.5s;"></div>
+    <div class="heart" style="top:70%; left:12%; animation-delay: 2.5s;"></div>
+    <div class="heart" style="top:85%; left:35%; animation-delay: 4s;"></div>
+    <div class="heart" style="top:75%; left:60%; animation-delay: 1s;"></div>
+    <div class="heart" style="top:88%; left:85%; animation-delay: 3.5s;"></div>
 
     <div class="container" id="mainCard">
         <img src="my-photo.png" alt="Our Photo" class="main-photo">
@@ -166,7 +161,8 @@
         function celebrate() {
             document.getElementById('mainCard').innerHTML = `
                 <img src="my-photo.png" alt="Our Photo" class="main-photo" style="transform: rotate(2deg);">
-                <h1>I'm Otter-ly in Love with You ❤️</h1>
+                <h1>I'm Otter-ly in love with Youuu~~~~ ❤️</h1>
+                <p style="font-size: 1.4rem;">Im your valentine 4ever!</p>
                 <div style="font-size: 60px; margin-top: 15px;">🦦</div>
                 <div class="signature">
                     Oyuka
